@@ -7,11 +7,13 @@ import sys,random
 class ZergAgent(base_agent.BaseAgent):
 	"""Construire un Agent de type Zerg"""
 	def __init__(self):
+		"""Fonction d'initialisation"""
 		super(ZergAgent,self).__init__()
 		self.attack_coordinates=None
 
 
 	def selection(self,obs,unit_type):
+		""" Séléction d'unités par groupe """
 		if (len(obs.observation.single_select) > 0 and obs.observation.single_select[0].unit_type == unit_type):
 			return True
     
@@ -21,21 +23,25 @@ class ZergAgent(base_agent.BaseAgent):
 			return False
 
 	def obtenirtype(self,obs,unit_type):
+		""" Extraire le type de l'unité """
 		for unit in obs.observation.feature_units:
 			if unit.unit_type == unit_type:
 				return unit
 
 	def get_units_by_type(self, obs, unit_type):
+		""" Extraire le type de l'unité"""
 		return [unit for unit in obs.observation.feature_units
 	        if unit.unit_type == unit_type]
 	
 
 	def actionpossible(self,obs,action):
+		""" Les coups possibles """
 		return action in obs.observation.available_actions
 
 	
 	
 	def step(self,obs):
+		"""Les steps du jeu"""
 		times=0
 		super(ZergAgent,self).step(obs)
 		if obs.first():
@@ -71,7 +77,6 @@ class ZergAgent(base_agent.BaseAgent):
 		zerglings = self.get_units_by_type(obs,units.Zerg.Zergling)
 		
 		if len(zerglings) >= 9:
-			print("Selected")
 			if self.selection(obs,units.Zerg.Zergling):
 				if self.actionpossible(obs,actions.FUNCTIONS.Attack_minimap.id):
 					return actions.FUNCTIONS.Attack_minimap("now",self.attack_coordinates)
@@ -91,7 +96,7 @@ class ZergAgent(base_agent.BaseAgent):
 				drone=random.choice(drones)
 				return actions.FUNCTIONS.select_point("select_all_type",(drone.x,drone.y))
 		
-
+		#train zergling or overloard (Egg)
 		if self.selection(obs,units.Zerg.Larva):
 			free_supply=(obs.observation.player.food_cap - obs.observation.player.food_used)
 			if free_supply ==0:
@@ -138,7 +143,7 @@ def main(unused_argv):
 				map_name="Simple64",
 				players=[sc2_env.Agent(sc2_env.Race.zerg),
 						sc2_env.Bot(sc2_env.Race.random,
-									sc2_env.Difficulty.easy)],
+									sc2_env.Difficulty.medium)],
 	          	agent_interface_format=features.AgentInterfaceFormat(
                 	feature_dimensions=features.Dimensions(screen=84, minimap=64),
                 	use_feature_units=True),

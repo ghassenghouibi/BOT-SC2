@@ -1,0 +1,20 @@
+Le bot zerg à pour stratégie la meilleur façon de defense c'est l'attaque.
+
+Les étapes du Bot:
+
+	-Bâtir Evolution_chamber pour améliorer l'attaque de zergling le Evolution_chamber permet au zergling d'attaquer avec plus de dégat donc une étape importante dans le bot vu la rapidité des zerglings et leur capacité d'attaque ça permet de prendre le dessous dans une partie
+
+	-Bâtir un Exctractor permettre aux drones à recolter des Vespene Gas
+
+	-Attaquer si et seulement si les zerglings leur nombre depassent le 8 (Raison on a 3 Egg *3),Le principe est le suivant envoyer des zergling pour attaquer les enemies par lot de 9 minimum 
+
+	-Bâtir un Spawing Pool permet de déverouiller le basic fighting units et Queen
+
+	-Entrainner les zergling Ou Overlord ça dépend des cas
+
+	-Bâtir une Hatchery dans le but d'avoir plus de zerglins à produire (ça depend de la rapidité de la partie )
+
+Comparatifs des variantes:
+	Le bot gagne 5/10 contre l'ia medium ça dépend des races (aussi)
+
+
